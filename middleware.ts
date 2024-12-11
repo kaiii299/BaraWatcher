@@ -3,10 +3,13 @@ import type { Session } from "better-auth/types";
 import { NextResponse, type NextRequest } from "next/server";
 
 export default async function authMiddleware(request: NextRequest) {
+
+  const baseURL = process.env.NEXT_PUBLIC_BASE_URL || request.nextUrl.origin;
+
   const { data: session } = await betterFetch<Session>(
     "/api/auth/get-session",
     {
-      baseURL: request.nextUrl.origin,
+      baseURL: baseURL ,
       headers: {
         //get the cookie from the request
         cookie: request.headers.get("cookie") || "",

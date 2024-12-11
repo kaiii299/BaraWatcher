@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
-import { Divide, Upload, X } from "lucide-react";
+// import { Upload, X } from "lucide-react";
 import ValidationForm from "@/components/validation-form";
-import { Input } from "@/components/ui/input";
 import { getValidationRequestById } from "@/app/actions/validationRequest";
 import { useToast } from "@/hooks/use-toast";
 
@@ -19,52 +18,52 @@ interface ValidationRequestData {
   updatedAt: Date;
 }
 
-function FileUpload({
-  file,
-  onFileSelect,
-  onRemove,
-}: {
-  file: string | null;
-  onFileSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onRemove: () => void;
-}) {
-  return file ? (
-    <div className="relative w-full h-full">
-      <Image
-        src={file}
-        alt="Content preview"
-        fill
-        className="object-cover rounded-lg"
-      />
-      <button
-        onClick={onRemove}
-        className="absolute top-2 right-2 p-1 bg-white rounded-full shadow-lg hover:bg-gray-100"
-      >
-        <X className="h-5 w-5" />
-      </button>
-    </div>
-  ) : (
-    <label className="flex flex-col items-center justify-center w-full h-full border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
-      <div className="flex flex-col items-center justify-center pt-5 pb-6">
-        <Upload className="h-10 w-10 text-gray-400 mb-3" />
-        <p className="mb-2 text-sm text-gray-500">
-          <span className="font-semibold">Click to upload</span> or drag and
-          drop
-        </p>
-        <p className="text-xs text-gray-500">PNG, JPG, GIF up to 100MB</p>
-      </div>
-      <input
-        type="file"
-        className="hidden"
-        onChange={onFileSelect}
-        accept="image/*"
-      />
-    </label>
-  );
-}
+// function FileUpload({
+//   file,
+//   onFileSelect,
+//   onRemove,
+// }: {
+//   file: string | null;
+//   onFileSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
+//   onRemove: () => void;
+// }) {
+//   return file ? (
+//     <div className="relative w-full h-full">
+//       <Image
+//         src={file}
+//         alt="Content preview"
+//         fill
+//         className="object-cover rounded-lg"
+//       />
+//       <button
+//         onClick={onRemove}
+//         className="absolute top-2 right-2 p-1 bg-white rounded-full shadow-lg hover:bg-gray-100"
+//       >
+//         <X className="h-5 w-5" />
+//       </button>
+//     </div>
+//   ) : (
+//     <label className="flex flex-col items-center justify-center w-full h-full border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+//       <div className="flex flex-col items-center justify-center pt-5 pb-6">
+//         <Upload className="h-10 w-10 text-gray-400 mb-3" />
+//         <p className="mb-2 text-sm text-gray-500">
+//           <span className="font-semibold">Click to upload</span> or drag and
+//           drop
+//         </p>
+//         <p className="text-xs text-gray-500">PNG, JPG, GIF up to 100MB</p>
+//       </div>
+//       <input
+//         type="file"
+//         className="hidden"
+//         onChange={onFileSelect}
+//         accept="image/*"
+//       />
+//     </label>
+//   );
+// }
 
 export default function NotePage({ params }: { params: { id: string } }) {
-  const [selectedFile, setSelectedFile] = useState<string | null>(null);
+  // const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [requestData, setRequestData] = useState<ValidationRequestData | null>(
     null
   );
@@ -85,6 +84,7 @@ export default function NotePage({ params }: { params: { id: string } }) {
           });
         }
       } catch (error) {
+        console.log(error); 
         toast({
           title: "Error",
           description: "Failed to fetch validation request",
@@ -97,17 +97,17 @@ export default function NotePage({ params }: { params: { id: string } }) {
     fetchData();
   }, [params.id, toast]);
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const fileUrl = URL.createObjectURL(file);
-      setSelectedFile(fileUrl);
-    }
-  };
+  // const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (file) {
+  //     const fileUrl = URL.createObjectURL(file);
+  //     setSelectedFile(fileUrl);
+  //   }
+  // };
 
-  const handleFileRemove = () => {
-    setSelectedFile(null);
-  };
+  // const handleFileRemove = () => {
+  //   setSelectedFile(null);
+  // };
 
   if (loading) {
     return <div className="container mx-auto py-6">Loading...</div>;

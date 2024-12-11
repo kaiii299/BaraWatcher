@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/db";
-import { ValidationRequest, ValidationRequestStatus, ValidationRequestType } from "@prisma/client";
+import { ValidationRequestStatus, ValidationRequestType } from "@prisma/client";
 
 export async function createValidationRequest(data: {
   status: ValidationRequestStatus;
@@ -39,6 +39,7 @@ export async function validateRequest(id: number) {
     })
     return { success: true }
   } catch (error) {
+    console.log(error)
     return { success: false, error: "Failed to validate request" }
   }
 }
@@ -51,6 +52,7 @@ export async function rejectRequest(id: number) {
     })
     return { success: true }
   } catch (error) {
+    console.log(error); 
     return { success: false, error: "Failed to reject request" }
   }
 }

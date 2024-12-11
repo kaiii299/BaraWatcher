@@ -43,7 +43,7 @@ export default function ScamDetectionTable({ validationRequests }: Props) {
   const { toast } = useToast();
   const [loading, setLoading] = useState<number | null>(null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
-  const pathname = usePathname();
+
 
   const sortedRequests = [...validationRequests].sort((a, b) => {
     if (!sortColumn) return 0;
@@ -100,11 +100,12 @@ export default function ScamDetectionTable({ validationRequests }: Props) {
   };
 
   const router = useRouter();
-
+  
   const handleNavigation = (id: number) => {
     router.push(`/dashboard/notes/${id}`); // Programmatically navigate to the dynamic route
   };
 
+  const pathname = usePathname() as string;
   const isAdminPage = pathname.endsWith("/admin"); // Check if the URL ends with /admin
 
   return (

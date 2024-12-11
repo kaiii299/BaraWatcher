@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation"
 import { authClient } from "@/lib/auth-client"
 
 export default function Navbar() {
-  const pathname = usePathname();
+  const pathname = usePathname() as string;
   const isDashboardRoute = pathname.includes("dashboard");
   const isLoginRoute = pathname.includes("login");
   const isRegisterRoute = pathname.includes("register");

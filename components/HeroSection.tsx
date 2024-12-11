@@ -4,19 +4,21 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Input } from "./ui/input";
 import { SearchIcon } from "lucide-react";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import baraAnimation from "@/app/images/bara.json";
 import { useRouter } from "next/navigation";
 
-const LottieAnimation = dynamic(() => import("@/app/components/lottie"), { 
+const LottieAnimation = dynamic(() => import("@/app/components/lottie"), {
   ssr: false,
-  loading: () => <div className="w-full h-full animate-pulse bg-gray-200 rounded-full" />
+  loading: () => (
+    <div className="w-full h-full animate-pulse bg-gray-200 rounded-full" />
+  ),
 });
 
 export default function HeroSection() {
   const router = useRouter();
   return (
-    <section className="mx-auto px-4 py-20 text-center bg-slate-100">
+    <section className="mx-auto px-4 p-20 text-center bg-slate-100">
       <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl fade-in">
         <span>BaraWatcher</span>
       </h1>
@@ -32,15 +34,18 @@ export default function HeroSection() {
             onClick={() => router.push("/login")}
           />
           <div className="flex justify-center items-center p-1">
-            <Button className="h-[50px] w-[50px] rounded-full bg-blue-300 hover:bg-blue-600" onClick={() =>  {router.push('/login')}}>
+            <Button
+              className="h-[50px] w-[50px] rounded-full bg-blue-300 hover:bg-blue-600"
+              onClick={() => {
+                router.push("/login");
+              }}
+            >
               <SearchIcon />
             </Button>
           </div>
         </div>
-        <div className="flex justify-start items-center">
-          <div className="absolute w-[25%] mr-4">
-            <LottieAnimation animationdata={baraAnimation}/>
-          </div>
+        <div className="absolute w-80 right-0 -mb-10 -mr-4">
+          <LottieAnimation animationdata={baraAnimation} />
         </div>
       </div>
       <div className="mt-8">
